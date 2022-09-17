@@ -9,8 +9,16 @@ import { CustomersController } from './controllers/customers.controller.js';
 import { UsersController } from './controllers/users.controller.js';
 
 @Module({
-  imports: [],
-  controllers: [AppController, ProductsController, CategoriesController, BrandsController, OrdersController, CustomersController, UsersController],
-  providers: [AppService],
+    imports: [],
+    controllers: [
+        AppController,
+        ProductsController,
+        CategoriesController,
+        BrandsController,
+        OrdersController,
+        CustomersController,
+        UsersController,
+    ],
+    providers: [AppService],
 })
 export class AppModule {}
