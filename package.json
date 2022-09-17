@@ -74,9 +74,9 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
-        "^(.+)/(.*).module.js": "$1/$2.module.ts",
-        "^(.+)/(.*).service.js": "$1/$2.service.ts",
-        "^(.+)/(.*).controller.js": "$1/$2.controller.ts"
+        "^\\.\\/(.*).module.js": "./$1.module.ts",
+        "^\\.\\/(.*).service.js": "./$1.service.ts",
+        "^\\.\\/(.*).controller.js": "./$1.controller.ts"
      },
      "preset": "ts-jest/presets/default-esm"
   }
