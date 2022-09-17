@@ -7,14 +7,16 @@ import {
     Put,
     Query,
     Delete,
+    HttpStatus,
+    HttpCode,
 } from '@nestjs/common';
 
 @Controller('products')
 export class ProductsController {
     @Get()
     getProducts(
-        @Query('limit') limit: number = 10,
-        @Query('offset') offset: number = 0,
+        @Query('limit') limit = 10,
+        @Query('offset') offset = 0,
         @Query('brand') brand: string,
     ) {
         return {
@@ -23,8 +25,11 @@ export class ProductsController {
     }
 
     @Get(':id')
-    getProduct(@Param('id') productId: number) {
-        return productId;
+    @HttpCode(HttpStatus.ACCEPTED)
+    getProduct(@Param('id') id: number) {
+        return {
+            message: `get product ${id}`,
+        };
     }
 
     @Get('filter')
