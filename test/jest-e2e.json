@@ -4,6 +4,15 @@
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
   "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
-  }
+    "^.+\\.(t|j)s$": [
+      "ts-jest",
+      {
+        "useESM": true
+      }
+    ]
+  },
+  "moduleNameMapper": {
+    "^(.+)/app.(.*).js": "$1/app.$2.ts"
+  },
+  "preset": "ts-jest/presets/default-esm"
 }

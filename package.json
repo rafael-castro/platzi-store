@@ -61,7 +61,12 @@
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
@@ -69,7 +74,8 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
-        "./app.(.*).js": "./app.$1.ts"
-     }
+        "^(.+)/app.(.*).js": "$1/app.$2.ts"
+     },
+     "preset": "ts-jest/presets/default-esm"
   }
 }
