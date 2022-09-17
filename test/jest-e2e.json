@@ -12,7 +12,9 @@
     ]
   },
   "moduleNameMapper": {
-    "^(.+)/app.(.*).js": "$1/app.$2.ts"
+    "^(.+)/(.*).module.js": "$1/$2.module.ts",
+    "^(.+)/(.*).service.js": "$1/$2.service.ts",
+    "^(.+)/(.*).controller.js": "$1/$2.controller.ts"
   },
   "preset": "ts-jest/presets/default-esm"
 }
