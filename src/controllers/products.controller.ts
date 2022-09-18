@@ -7,8 +7,8 @@ import {
     Put,
     Query,
     Delete,
-    ParseIntPipe,
 } from '@nestjs/common';
+import { ParseIntPipe } from './../common/parse-int.pipe.js';
 import { ProductsService } from './../services/products.service.js';
 
 @Controller('products')
