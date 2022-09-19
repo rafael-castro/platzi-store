@@ -12,9 +12,12 @@
     ]
   },
   "moduleNameMapper": {
-    "^(.+)/(.*).module.js": "$1/$2.module.ts",
-    "^(.+)/(.*).service.js": "$1/$2.service.ts",
-    "^(.+)/(.*).controller.js": "$1/$2.controller.ts"
+    "^\\.\\/(.*).module.js": "./$1.module.ts",
+    "^\\.\\/(.*).service.js": "./$1.service.ts",
+    "^\\.\\/(.*).controller.js": "./$1.controller.ts",
+    "^\\.\\/(.*).dto.js": "./$1.dto.ts",
+    "^\\.\\/(.*).entity.js": "./$1.entity.ts",
+    "^\\.\\/(.*).pipe.js": "./$1.pipe.ts"
   },
   "preset": "ts-jest/presets/default-esm"
 }

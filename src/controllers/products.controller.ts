@@ -8,7 +8,11 @@ import {
     Query,
     Delete,
 } from '@nestjs/common';
-import { CreateProductDto, UpdateProductDto } from './../dtos/products.dto.js';
+import {
+    ProductId,
+    CreateProductDto,
+    UpdateProductDto,
+} from './../dtos/products.dto.js';
 import { ParseIntPipe } from './../common/parse-int.pipe.js';
 import { ProductsService } from './../services/products.service.js';
 
@@ -17,22 +21,17 @@ export class ProductsController {
     constructor(private productService: ProductsService) {}
 
     @Get()
-    getProducts(
+    find(
         @Query('limit', ParseIntPipe) limit = 10,
         @Query('offset', ParseIntPipe) offset = 0,
         @Query('brand') brand: string,
     ) {
-        return this.productService.findAll();
+        return this.productService.find();
     }
 
     @Get(':id')
-    getProduct(@Param('id', ParseIntPipe) id: number) {
-        return this.productService.findOne(id);
-    }
-
-    @Get('filter')
-    getProductFilter() {
-        return 'filter';
+    findById(@Param('id', ParseIntPipe) id: ProductId) {
+        return this.productService.findById(id);
     }
 
     @Post()
@@ -42,14 +41,14 @@ export class ProductsController {
 
     @Put(':id')
     update(
-        @Param('id', ParseIntPipe) id: number,
+        @Param('id', ParseIntPipe) id: ProductId,
         @Body() payload: UpdateProductDto,
     ) {
         return this.productService.update(id, payload);
     }
 
     @Delete(':id')
-    delete(@Param('id', ParseIntPipe) id: number) {
+    delete(@Param('id', ParseIntPipe) id: ProductId) {
         return this.productService.delete(id);
     }
 }

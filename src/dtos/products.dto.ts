@@ -6,8 +6,11 @@ import {
     IsNotEmpty,
     IsPositive,
 } from 'class-validator';
+import { Product } from './../entities/product.entity.js';
 
-export class CreateProductDto {
+export type ProductId = Product['id'];
+
+export class CreateProductDto implements Omit<Product, 'id'> {
     @IsNotEmpty()
     @IsString()
     readonly name: string;
