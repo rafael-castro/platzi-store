@@ -4,11 +4,7 @@ import { UserService } from './../services/user.service.js';
 
 @Controller('users')
 export class UsersController {
-    private usersService: UserService;
-
-    constructor(usersService: UserService) {
-        this.usersService = usersService;
-    }
+    constructor(private usersService: UserService) {}
 
     @Get(':id')
     findOne(@Param('id', ParseIntPipe) id: UserId) {

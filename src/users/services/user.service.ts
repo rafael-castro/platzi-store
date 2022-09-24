@@ -15,11 +15,8 @@ export class UserService {
             role: Role.ADMIN,
         },
     ];
-    private productsService: ProductsService;
 
-    constructor(productsService: ProductsService) {
-        this.productsService = productsService;
-    }
+    constructor(private productsService: ProductsService) {}
 
     find() {
         return this.users;
