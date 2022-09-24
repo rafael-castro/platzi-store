@@ -5,16 +5,9 @@ import { ProductsModule } from './products/products.module.js';
 import { UsersModule } from './users/users.module.js';
 import { CustomersModule } from './customers/customers.module.js';
 import { OrdersModule } from './orders/orders.module.js';
-import { BrandsModule } from './brands/brands.module.js';
 
 @Module({
-    imports: [
-        ProductsModule,
-        UsersModule,
-        CustomersModule,
-        OrdersModule,
-        BrandsModule,
-    ],
+    imports: [ProductsModule, UsersModule, CustomersModule, OrdersModule],
     controllers: [AppController],
     providers: [AppService],
 })

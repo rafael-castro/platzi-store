@@ -51,7 +51,7 @@ describe('CategoriesController (e2e)', () => {
     });
 
     it('/categories/1 (GET)', (done) => {
-        return request(app.getHttpServer())
+        request(app.getHttpServer())
             .get('/categories/1')
             .expect(404)
             .then((response) => {
