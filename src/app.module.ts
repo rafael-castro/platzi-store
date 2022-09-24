@@ -1,26 +1,21 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
-import { ProductsController } from './controllers/products.controller.js';
-import { CategoriesController } from './controllers/categories.controller.js';
-import { BrandsController } from './controllers/brands.controller.js';
-import { OrdersController } from './controllers/orders.controller.js';
-import { CustomersController } from './controllers/customers.controller.js';
-import { UsersController } from './controllers/users.controller.js';
-import { ProductsService } from './services/products.service.js';
-import { CategoriesService } from './services/categories.service.js';
+import { ProductsModule } from './products/products.module.js';
+import { UsersModule } from './users/users.module.js';
+import { CustomersModule } from './customers/customers.module.js';
+import { OrdersModule } from './orders/orders.module.js';
+import { BrandsModule } from './brands/brands.module.js';
 
 @Module({
-    imports: [],
-    controllers: [
-        AppController,
-        ProductsController,
-        CategoriesController,
-        BrandsController,
-        OrdersController,
-        CustomersController,
-        UsersController,
+    imports: [
+        ProductsModule,
+        UsersModule,
+        CustomersModule,
+        OrdersModule,
+        BrandsModule,
     ],
-    providers: [AppService, ProductsService, CategoriesService],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}

@@ -7,7 +7,7 @@ import {
     Post,
     Put,
 } from '@nestjs/common';
-import { ParseIntPipe } from './../common/parse-int.pipe.js';
+import { ParseIntPipe } from './../../common/parse-int.pipe.js';
 import {
     CategoryId,
     CreateCategoryDto,

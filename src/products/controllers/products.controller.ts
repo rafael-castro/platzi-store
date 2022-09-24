@@ -13,7 +13,7 @@ import {
     CreateProductDto,
     UpdateProductDto,
 } from './../dtos/products.dto.js';
-import { ParseIntPipe } from './../common/parse-int.pipe.js';
+import { ParseIntPipe } from './../../common/parse-int.pipe.js';
 import { ProductsService } from './../services/products.service.js';
 
 @Controller('products')
