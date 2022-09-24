@@ -7,6 +7,7 @@ import { CustomersModule } from './customers/customers.module.js';
 import { OrdersModule } from './orders/orders.module.js';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
+import { DatabaseModule } from './database/database.module.js';
 
 @Module({
     imports: [
@@ -15,14 +16,11 @@ import { lastValueFrom } from 'rxjs';
         UsersModule,
         CustomersModule,
         OrdersModule,
+        DatabaseModule,
     ],
     controllers: [AppController],
     providers: [
         AppService,
-        {
-            provide: 'API_KEY',
-            useValue: process.env.NODE_ENV === 'prod' ? 'PROD' : 'DEV',
-        },
         {
             provide: 'TASKS',
             inject: [HttpService],
@@ -35,5 +33,6 @@ import { lastValueFrom } from 'rxjs';
             },
         },
     ],
+    exports: ['TASKS'],
 })
 export class AppModule {}
