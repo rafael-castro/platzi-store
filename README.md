@@ -19,6 +19,14 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# docker
+$ docker build -t platzi-store .
+$ docker run -d -p 3001:3000 --env-file ./.env platzi-store
+
+# podman
+$ podman --remote build -t platzi-store .
+$ podman --remote run -d -p 3001:3000 --env-file ./.env platzi-store
 ```
 
 ## Test
