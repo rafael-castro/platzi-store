@@ -1,7 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 import { IsString, IsNotEmpty } from 'class-validator';
 
-import { Category } from './../entities/category.entity.js';
+import { Category } from './../entities/category.entity';
 
 export type CategoryId = Category['id'];
 

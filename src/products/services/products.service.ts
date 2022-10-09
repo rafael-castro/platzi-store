@@ -3,8 +3,8 @@ import {
     ProductId,
     CreateProductDto,
     UpdateProductDto,
-} from './../dtos/products.dto.js';
-import { Product } from './../entities/product.entity.js';
+} from './../dtos/products.dto';
+import { Product } from './../entities/product.entity';
 
 @Injectable()
 export class ProductsService {

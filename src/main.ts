@@ -1,6 +1,8 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module.js';
+import { ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -10,6 +12,21 @@ async function bootstrap() {
             forbidNonWhitelisted: true,
         }),
     );
+
+    SwaggerModule.setup(
+        'docs',
+        app,
+        SwaggerModule.createDocument(
+            app,
+            new DocumentBuilder()
+                .setTitle('Platzi API')
+                .setDescription('Documentación Platzi API')
+                .setVersion('1.0')
+                .addTag('platzi')
+                .build(),
+        ),
+    );
+
     await app.listen(3000);
 }
 bootstrap();

@@ -6,16 +6,16 @@ import { lastValueFrom } from 'rxjs';
 
 import Joi from 'joi';
 
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
-import { ProductsModule } from './products/products.module.js';
-import { UsersModule } from './users/users.module.js';
-import { CustomersModule } from './customers/customers.module.js';
-import { OrdersModule } from './orders/orders.module.js';
-import { DatabaseModule } from './database/database.module.js';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ProductsModule } from './products/products.module';
+import { UsersModule } from './users/users.module';
+import { CustomersModule } from './customers/customers.module';
+import { OrdersModule } from './orders/orders.module';
+import { DatabaseModule } from './database/database.module';
 
-import { environments } from './environments.js';
-import config from './config.js';
+import { environments } from './environments';
+import config from './config';
 
 @Module({
     imports: [

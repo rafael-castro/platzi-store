@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
-import { UserId } from './../dtos/user.dto.js';
-import { UserService } from './../services/user.service.js';
+import { UserId } from './../dtos/user.dto';
+import { UserService } from './../services/user.service';
 
 @Controller('users')
 export class UsersController {

@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Order } from './../../orders/entities/order.entity.js';
-import { UserId } from './../dtos/user.dto.js';
-import { Role, User } from './../entities/user.entity.js';
-import { ProductsService } from './../../products/services/products.service.js';
+import { Order } from './../../orders/entities/order.entity';
+import { UserId } from './../dtos/user.dto';
+import { Role, User } from './../entities/user.entity';
+import { ProductsService } from './../../products/services/products.service';
 
 @Injectable()
 export class UserService {

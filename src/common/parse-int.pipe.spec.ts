@@ -1,4 +1,4 @@
-import { ParseIntPipe } from './parse-int.pipe.js';
+import { ParseIntPipe } from './parse-int.pipe';
 
 describe('ParseIntPipe', () => {
     it('should be defined', () => {

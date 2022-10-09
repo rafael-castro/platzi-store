@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 import {
     IsString,
     IsNumber,
@@ -6,7 +6,7 @@ import {
     IsNotEmpty,
     IsPositive,
 } from 'class-validator';
-import { Product } from './../entities/product.entity.js';
+import { Product } from './../entities/product.entity';
 
 export type ProductId = Product['id'];
 
