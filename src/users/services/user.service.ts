@@ -30,12 +30,12 @@ export class UserService {
         return this.users[userIndex];
     }
 
-    findOrdersByUser(id: UserId): Order {
+    async findOrdersByUser(id: UserId): Promise<Order> {
         const user = this.findOne(id);
         return {
             date: new Date(),
             user: user,
-            products: this.productsService.find(),
+            products: await this.productsService.find(),
         };
     }
 

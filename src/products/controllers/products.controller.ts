@@ -25,11 +25,7 @@ export class ProductsController {
     constructor(private productService: ProductsService) {}
 
     @Get()
-    find(
-        @Query('limit', ParseIntPipe) limit = 10,
-        @Query('offset', ParseIntPipe) offset = 0,
-        @Query('brand') brand: string,
-    ) {
+    find(@Query('brand') brand: string) {
         return this.productService.find();
     }
 

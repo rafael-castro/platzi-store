@@ -20,12 +20,12 @@ export class CreateProductDto implements Omit<Product, 'id'> {
     readonly description: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsNumber({ maxDecimalPlaces: 2 })
     @IsPositive()
     readonly price: number;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsNumber({ maxDecimalPlaces: 0 })
     @IsPositive()
     readonly stock: number;
 
