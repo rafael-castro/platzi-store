@@ -20,13 +20,18 @@ import config from './config';
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: environments[process.env.NODE_ENV] || '.env',
+            envFilePath: environments[process.env.NODE_ENV] || '.api.env',
             load: [config],
             isGlobal: true,
             validationSchema: Joi.object({
                 API_KEY: Joi.number().required(),
                 DATABASE_NAME: Joi.string().required(),
                 DATABASE_PORT: Joi.number().required(),
+                PG_DATABASE: Joi.string().required(),
+                PG_USER: Joi.string().required(),
+                PG_PASSWORD: Joi.string().required(),
+                PG_PORT: Joi.number().required(),
+                PG_HOST: Joi.string().required(),
             }),
         }),
         HttpModule,

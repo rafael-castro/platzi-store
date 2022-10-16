@@ -14,4 +14,9 @@ export class AppController {
     getGreetings(): string {
         return 'hey';
     }
+
+    @Get('tasks')
+    getTasks() {
+        return this.appService.getTasks();
+    }
 }
