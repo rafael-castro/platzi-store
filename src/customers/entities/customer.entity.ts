@@ -1,32 +1,26 @@
+import { User } from 'src/users/entities/user.entity';
 import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinColumn,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
 
-import { Customer } from 'src/customers/entities/customer.entity';
-
-export enum Role {
-    ADMIN = 'admin',
-}
-
 @Entity()
-export class User {
+export class Customer {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column({ type: 'varchar', length: 255 })
-    email: string;
+    name: string;
 
     @Column({ type: 'varchar', length: 255 })
-    password: string;
+    lastName: string;
 
-    @Column({ type: 'varchar', length: 100 })
-    role: Role;
+    @Column({ type: 'varchar', length: 255 })
+    phone: string;
 
     @CreateDateColumn({
         type: 'timestamptz',
@@ -40,7 +34,6 @@ export class User {
     })
     updatedAt: Date;
 
-    @OneToOne(() => Customer, (customer) => customer.user, { nullable: true })
-    @JoinColumn()
-    customer: Customer;
+    @OneToOne(() => User, (user) => user.customer, { nullable: true })
+    user: User;
 }
