@@ -10,7 +10,9 @@ import { Product } from './../entities/product.entity';
 
 export type ProductId = Product['id'];
 
-export class CreateProductDto implements Omit<Product, 'id'> {
+export class CreateProductDto
+    implements Omit<Product, 'id' | 'createdAt' | 'updatedAt'>
+{
     @IsNotEmpty()
     @IsString()
     readonly name: string;

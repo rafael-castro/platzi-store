@@ -1,5 +1,5 @@
 export const environments = {
-    dev: '.env',
-    staging: '.staging.env',
-    production: '.production.env',
+    development: '.api.env',
+    staging: '.api.staging.env',
+    production: '.api.production.env',
 };

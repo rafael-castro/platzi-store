@@ -14,7 +14,7 @@ async function bootstrap() {
     );
 
     SwaggerModule.setup(
-        'docs',
+        'swagger',
         app,
         SwaggerModule.createDocument(
             app,

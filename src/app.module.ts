@@ -42,20 +42,6 @@ import config from './config';
         DatabaseModule,
     ],
     controllers: [AppController],
-    providers: [
-        AppService,
-        {
-            provide: 'TASKS',
-            inject: [HttpService],
-            useFactory: async (httpService: HttpService) => {
-                const source$ = httpService.get(
-                    'https://jsonplaceholder.typicode.com/todos',
-                );
-                const task = await lastValueFrom(source$);
-                return task.data;
-            },
-        },
-    ],
-    exports: ['TASKS'],
+    providers: [AppService],
 })
 export class AppModule {}
