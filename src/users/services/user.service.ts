@@ -7,6 +7,7 @@ import { CreateUserDto, UpdateUserDto, UserId } from 'src/users/dtos/user.dto';
 import { User } from 'src/users/entities/user.entity';
 import { ProductsService } from 'src/products/services/products.service';
 import { CustomersService } from 'src/customers/services/customers.service';
+import { CustomerId } from 'src/customers/dtos/customer.dto';
 
 @Injectable()
 export class UserService {
@@ -21,20 +22,20 @@ export class UserService {
     }
 
     async findOne(id: UserId) {
-        const user = await this.userRepository.findOneBy({ id });
+        const user = await this.userRepository
+            .createQueryBuilder('user')
+            .where('user.id = :id', { id: id })
+            .getOne();
         if (!user) {
             throw new NotFoundException(`user ${id} not found`);
         }
         return user;
     }
 
-    async findOrdersByUser(id: UserId): Promise<Order> {
-        const user = await this.findOne(id);
-        return {
-            date: new Date(),
-            user: user,
-            products: await this.productsService.find(),
-        };
+    async findOrdersByUser(id: UserId): Promise<Order[]> {
+        return await this.customersService.findOrdersByCustomer(
+            id as CustomerId,
+        );
     }
 
     async create(payload: CreateUserDto) {
@@ -49,7 +50,10 @@ export class UserService {
     }
 
     async update(id: UserId, payload: UpdateUserDto) {
-        const user = await this.userRepository.findOneBy({ id });
+        const user = await this.userRepository
+            .createQueryBuilder('user')
+            .where('user.id = :id', { id: id })
+            .getOne();
         if (!user) {
             throw new NotFoundException(`User ${id} not found`);
         }

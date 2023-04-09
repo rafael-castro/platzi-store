@@ -6,7 +6,8 @@ import { Customer } from 'src/customers/entities/customer.entity';
 export type CustomerId = Customer['id'];
 
 export class CreateCustomerDto
-    implements Omit<Customer, 'id' | 'createdAt' | 'updatedAt' | 'user'>
+    implements
+        Omit<Customer, 'id' | 'createdAt' | 'updatedAt' | 'user' | 'orders'>
 {
     @IsNotEmpty()
     @IsString()

@@ -1,34 +1,26 @@
-import { Order } from 'src/orders/entities/order.entity';
-import { User } from 'src/users/entities/user.entity';
 import {
     Column,
     CreateDateColumn,
     Entity,
     OneToMany,
-    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
+import { Product } from './product.entity';
 
 @Entity()
-export class Customer {
+export class Brand {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', length: 255 })
+    @Column({ type: 'varchar', length: 255, unique: true })
     name: string;
 
     @Column({ type: 'varchar', length: 255 })
-    lastName: string;
+    image: string;
 
-    @Column({ type: 'varchar', length: 255 })
-    phone: string;
-
-    @OneToOne(() => User, (user) => user.customer, { nullable: true })
-    user: User;
-
-    @OneToMany(() => Order, (order) => order.customer)
-    orders: Order[];
+    @OneToMany(() => Product, (product) => product.brand)
+    products: Product[];
 
     @CreateDateColumn({
         type: 'timestamptz',

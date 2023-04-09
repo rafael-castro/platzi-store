@@ -4,7 +4,13 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    ManyToOne,
+    ManyToMany,
+    JoinTable,
 } from 'typeorm';
+
+import { Brand } from 'src/products/entities/brand.entity';
+import { Category } from 'src/products/entities/category.entity';
 
 @Entity()
 export class Product {
@@ -25,6 +31,13 @@ export class Product {
 
     @Column({ type: 'varchar' })
     image: string;
+
+    @ManyToOne(() => Brand, (brand) => brand.products)
+    brand: Brand;
+
+    @ManyToMany(() => Category, (category) => category.products)
+    @JoinTable()
+    categories: Category[];
 
     @CreateDateColumn({
         type: 'timestamptz',

@@ -1,59 +1,59 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Category } from './../entities/category.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { Category } from 'src/products/entities/category.entity';
 import {
     CategoryId,
     CreateCategoryDto,
     UpdateCategoryDto,
-} from './../dtos/categories.dto';
+} from 'src/products/dtos/categories.dto';
 
 @Injectable()
 export class CategoriesService {
-    private categoryId = 0;
-    private categories: Category[] = [];
+    constructor(
+        @InjectRepository(Category)
+        private categoryRepository: Repository<Category>,
+    ) {}
 
-    find(): Category[] {
-        return this.categories;
+    async find() {
+        return await this.categoryRepository.find();
     }
 
-    findById(id: CategoryId): Category {
-        const categoryIndex = this.getCategoryIndex(id);
-        if (categoryIndex < 0) {
+    async findById(id: CategoryId): Promise<Category> {
+        const category = await this.categoryRepository
+            .createQueryBuilder('category')
+            .where('category.id = :id', { id: id })
+            .getOne();
+        if (!category) {
             throw new NotFoundException(`category ${id} not found`);
         }
-        return this.categories[categoryIndex];
-    }
-
-    create(categoryDto: CreateCategoryDto): Category {
-        this.categoryId = this.categoryId + 1;
-        const category = {
-            ...categoryDto,
-            id: this.categoryId,
-        };
-        this.categories.push(category);
         return category;
     }
-
-    update(id: CategoryId, categoryDto: UpdateCategoryDto): Category {
-        const categoryIndex = this.getCategoryIndex(id);
-        if (categoryIndex < 0) {
-            throw new NotFoundException(`category ${id} not found`);
+    async findByIds(ids: CategoryId[]): Promise<Category[]> {
+        const categories = await this.categoryRepository
+            .createQueryBuilder('category')
+            .where('category.id IN (:...ids)', { ids: ids })
+            .getMany();
+        if (!categories) {
+            throw new NotFoundException(`categories ${ids} not found`);
         }
-        this.categories[categoryIndex] = {
-            ...this.categories[categoryIndex],
-            ...categoryDto,
-        };
-        return this.categories[categoryIndex];
+        return categories;
     }
 
-    delete(id: CategoryId): Category[] {
-        const categoryIndex = this.getCategoryIndex(id);
-        if (categoryIndex < 0) {
-            throw new NotFoundException(`category ${id} not found`);
-        }
-        return this.categories.splice(categoryIndex, 1);
+    create(payload: CreateCategoryDto) {
+        const newCategory = this.categoryRepository.create(payload);
+        return this.categoryRepository.save(newCategory);
     }
 
-    private getCategoryIndex(id: CategoryId): number {
-        return this.categories.findIndex((item) => item.id === id);
+    async update(id: CategoryId, payload: UpdateCategoryDto) {
+        const category = await this.findById(id);
+        this.categoryRepository.merge(category, payload);
+        return this.categoryRepository.save(category);
+    }
+
+    async delete(id: CategoryId) {
+        const category = await this.findById(id);
+        return this.categoryRepository.delete(category);
     }
 }

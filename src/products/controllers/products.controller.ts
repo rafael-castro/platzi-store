@@ -15,9 +15,10 @@ import {
     ProductId,
     CreateProductDto,
     UpdateProductDto,
-} from './../dtos/products.dto';
-import { ParseIntPipe } from './../../common/parse-int.pipe';
-import { ProductsService } from './../services/products.service';
+} from 'src/products/dtos/products.dto';
+import { ParseIntPipe } from 'src/common/parse-int.pipe';
+import { ProductsService } from 'src/products/services/products.service';
+import { CategoryId } from 'src/products/dtos/categories.dto';
 
 @ApiTags('products')
 @Controller('products')
@@ -50,5 +51,24 @@ export class ProductsController {
     @Delete(':id')
     delete(@Param('id', ParseIntPipe) id: ProductId) {
         return this.productService.delete(id);
+    }
+
+    @Post(':id/category/:categoryId')
+    async addCategoryByProduct(
+        @Param('id', ParseIntPipe) id: ProductId,
+        @Param('categoryId', ParseIntPipe) categoryId: CategoryId,
+    ) {
+        return await this.productService.addCategoryByProduct(id, categoryId);
+    }
+
+    @Delete(':id/category/:categoryId')
+    async deleteCategoryByProduct(
+        @Param('id', ParseIntPipe) id: ProductId,
+        @Param('categoryId', ParseIntPipe) categoryId: CategoryId,
+    ) {
+        return await this.productService.removeCategoryByProduct(
+            id,
+            categoryId,
+        );
     }
 }
