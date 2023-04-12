@@ -30,6 +30,7 @@ export class CategoriesService {
         }
         return category;
     }
+
     async findByIds(ids: CategoryId[]): Promise<Category[]> {
         const categories = await this.categoryRepository
             .createQueryBuilder('category')

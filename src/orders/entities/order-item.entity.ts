@@ -4,7 +4,6 @@ import {
     CreateDateColumn,
     Entity,
     ManyToOne,
-    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
@@ -21,7 +20,7 @@ export class OrderItem {
     @ManyToOne(() => Product)
     product: Product;
 
-    @OneToMany(() => Order, (order) => order.items)
+    @ManyToOne(() => Order, (order) => order.items)
     order: Order;
 
     @CreateDateColumn({

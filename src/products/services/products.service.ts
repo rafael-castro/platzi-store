@@ -39,6 +39,18 @@ export class ProductsService {
 
         return product;
     }
+    async findByIds(ids: ProductId[]): Promise<Product[]> {
+        const products = await this.productRepository
+            .createQueryBuilder()
+            .select('product')
+            .from(Product, 'product')
+            .where('category.id IN (:...ids)', { ids: ids })
+            .getMany();
+        if (!products) {
+            throw new NotFoundException(`products ${ids} not found`);
+        }
+        return products;
+    }
 
     async create(payload: CreateProductDto) {
         const newProduct = this.productRepository.create(payload);
