@@ -8,6 +8,8 @@ import {
     IsArray,
     ArrayNotEmpty,
     ArrayMinSize,
+    IsOptional,
+    isPositive,
 } from 'class-validator';
 
 import { Product } from 'src/products/entities/product.entity';
@@ -63,3 +65,15 @@ export class CreateProductDto
 }
 
 export class UpdateProductDto extends PartialType(CreateProductDto) {}
+
+export class FilterProductsDto {
+    @IsOptional()
+    @IsNumber()
+    @ApiProperty()
+    limit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    @ApiProperty()
+    offset?: number;
+}

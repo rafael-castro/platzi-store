@@ -6,6 +6,7 @@ import {
     ProductId,
     CreateProductDto,
     UpdateProductDto,
+    FilterProductsDto,
 } from 'src/products/dtos/products.dto';
 import { Product } from 'src/products/entities/product.entity';
 import { BrandsService } from './brands.service';
@@ -21,7 +22,14 @@ export class ProductsService {
         private categoriesService: CategoriesService,
     ) {}
 
-    find() {
+    find(filter?: FilterProductsDto) {
+        if (filter) {
+            return this.productRepository.find({
+                relations: ['brand', 'categories'],
+                take: filter.limit,
+                skip: filter.offset,
+            });
+        }
         return this.productRepository.find({
             relations: ['brand', 'categories'],
         });

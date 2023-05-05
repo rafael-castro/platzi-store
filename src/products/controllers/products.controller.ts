@@ -15,6 +15,7 @@ import {
     ProductId,
     CreateProductDto,
     UpdateProductDto,
+    FilterProductsDto,
 } from 'src/products/dtos/products.dto';
 import { ParseIntPipe } from 'src/common/parse-int.pipe';
 import { ProductsService } from 'src/products/services/products.service';
@@ -26,8 +27,8 @@ export class ProductsController {
     constructor(private productService: ProductsService) {}
 
     @Get()
-    find(@Query('brand') brand: string) {
-        return this.productService.find();
+    find(@Query() filter: FilterProductsDto) {
+        return this.productService.find(filter);
     }
 
     @Get(':id')
